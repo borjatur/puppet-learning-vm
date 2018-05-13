@@ -31,7 +31,7 @@ node default {
 }
 
 node 'agent.puppet.vm' {
-  notify { 'Hello Puppet!': }  
+  notify { 'Hello Puppet!': }
 }
 
 node 'cowsay.puppet.vm' {
@@ -42,5 +42,15 @@ node 'pasture.puppet.vm' {
   include motd
   class { 'pasture':
     default_character => 'cow',
+  }
+}
+
+node 'pasture-dev.puppet.vm' {
+  include pasture
+}
+
+node 'pasture-prod.puppet.vm' {
+  class { 'pasture':
+    sinatra_server => 'thin'
   }
 }

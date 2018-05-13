@@ -1,9 +1,9 @@
 class pasture (
   $port = '80',
-  $default_character = 'sheep',
-  $default_message = '',
+  $default_character   = 'sheep',
+  $default_message     = '',
   $pasture_config_file = '/etc/pasture_config.yaml',
-
+  $sinatra_server      = 'webrick',
 ){
 
   package { 'pasture':
@@ -16,6 +16,7 @@ class pasture (
     'port'              => $port,
     'default_character' => $default_character,
     'default_message'   => $default_message,
+    'sinatra_server'    => $sinatra_server,
   }
 
   file { $pasture_config_file:
@@ -34,5 +35,12 @@ class pasture (
 
   service { 'pasture':
     ensure => running,
+  }
+
+  if $sinatra_server == 'thin' or 'mongrel' {
+    package { $sinatra_server:
+      provider => 'gem',
+      notify   => Service['pasture'],
+    }
   }
 }
