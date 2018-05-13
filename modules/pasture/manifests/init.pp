@@ -1,9 +1,10 @@
-class pasture {
+class pasture (
+  $port = '80',
+  $default_character = 'sheep',
+  $default_message = '',
+  $pasture_config_file = '/etc/pasture_config.yaml',
 
-  $port = '80'
-  $default_character = 'sheep'
-  $default_message = ''
-  $pasture_config_file = '/etc/pasture_config.yaml'
+){
 
   package { 'pasture':
     ensure   => present,

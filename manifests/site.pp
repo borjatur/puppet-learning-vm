@@ -39,5 +39,7 @@ node 'cowsay.puppet.vm' {
 }
 
 node 'pasture.puppet.vm' {
-  include pasture
+  class { 'pasture':
+    default_character => 'cow',
+  }
 }
