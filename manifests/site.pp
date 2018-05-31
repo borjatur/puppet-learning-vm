@@ -54,3 +54,14 @@ node 'pasture-prod.puppet.vm' {
     sinatra_server => 'thin'
   }
 }
+
+node 'pasture-db.puppet.vm' {
+  include pasture::db
+}
+
+node 'pasture-app.puppet.vm' {
+  class { 'pasture':
+    sinatra_server => 'thin',
+    db             => 'postgres://pasture:m00m00@pasture-db.puppet.vm/pasture',
+  }
+}

@@ -4,6 +4,7 @@ class pasture (
   $default_message     = '',
   $pasture_config_file = '/etc/pasture_config.yaml',
   $sinatra_server      = 'webrick',
+  $db                  = 'none',
 ){
 
   package { 'pasture':
@@ -17,6 +18,7 @@ class pasture (
     'default_character' => $default_character,
     'default_message'   => $default_message,
     'sinatra_server'    => $sinatra_server,
+    'db'                => $db,
   }
 
   file { $pasture_config_file:
